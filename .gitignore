@@ -8,3 +8,5 @@ backend/accounts/migrations/
 __pycache__/
 *.pyc
 *.pyo
+
+copy.txt

@@ -52,10 +52,18 @@ class TeacherSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = '__all__'
-        extra_kwargs = {
-            'user': {'read_only': True},
-        }
+        fields = ['roll_no','CRN','department','student_class','division']
+        # extra_kwargs = {
+        #     'user': {'read_only': True},
+        # }
+    def __init__(self,*args,**kwargs):
+            super(StudentSerializer,self).__init__(*args,**kwargs)
+            request = self.context.get("request")
+            if request and request.method == "POST":
+                self.Meta.depth = 0
+            else:
+                self.Meta.depth = 3
+
 
 
 class TeacherSerializer(serializers.ModelSerializer):
